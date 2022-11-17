@@ -1,7 +1,4 @@
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 import os
-
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,12 +9,11 @@ from keras.layers import GlobalAveragePooling2D
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
-angry = 'angry/'
-sad = 'sad/'
-relaxed = 'relaxed/'
-happy = 'happy/'
+# Path de las imagenes
+angry = 'images/angry/'
+sad = 'images/sad/'
+relaxed = 'images/relaxed/'
+happy = 'images/happy/'
 
 angry_path = os.listdir(angry)
 sad_path = os.listdir(sad)
@@ -25,15 +21,12 @@ relaxed_path = os.listdir(relaxed)
 happy_path = os.listdir(happy)
 
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
+# Carga de imagenes y muestras
 def load_img(path):
     image = cv2.imread(path)
     image = cv2.resize(image, (224, 224))
     return image[..., ::-1]
 
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 fig = plt.figure(figsize=(10, 10))
 
@@ -44,8 +37,6 @@ for i in range(16):
     plt.axis('off')
 
 plt.show()
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 fig = plt.figure(figsize=(10, 10))
 
@@ -58,8 +49,6 @@ for i in range(16):
 
 plt.show()
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 fig = plt.figure(figsize=(10, 10))
 
 for i in range(16):
@@ -70,8 +59,6 @@ for i in range(16):
     plt.axis('off')
 
 plt.show()
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 fig = plt.figure(figsize=(10, 10))
 
@@ -84,18 +71,13 @@ for i in range(16):
 
 plt.show()
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
-dataset_path = "/kaggle/input/dog-emotions-prediction/images"
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
+# Datasets
+dataset_path = "images"
 
 data_with_aug = ImageDataGenerator(horizontal_flip=True,
                                    vertical_flip=False,
                                    rescale=1. / 255,
                                    validation_split=0.3)
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 train = data_with_aug.flow_from_directory(dataset_path,
                                           class_mode="binary",
@@ -103,16 +85,12 @@ train = data_with_aug.flow_from_directory(dataset_path,
                                           batch_size=32,
                                           subset="training")
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 val = data_with_aug.flow_from_directory(dataset_path,
                                         class_mode="binary",
                                         target_size=(96, 96),
                                         batch_size=32,
                                         subset="validation"
                                         )
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 mnet = MobileNetV2(include_top=False, weights="imagenet", input_shape=(96, 96, 3))
 
