@@ -3,6 +3,10 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
+import matplotlib
+
+matplotlib.use('TkAgg')
 from keras.applications.mobilenet_v2 import MobileNetV2
 from keras.layers import Dropout, Dense, BatchNormalization, Flatten
 from keras.layers import GlobalAveragePooling2D
