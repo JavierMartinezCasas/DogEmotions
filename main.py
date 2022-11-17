@@ -126,7 +126,7 @@ Model: "sequential"
 def scheduler(epoch):
     if epoch <= 2:
         return 0.001
-    elif epoch > 2 and epoch <= 15:
+    elif 2 < epoch <= 15:
         return 0.0001
     else:
         return 0.00001
@@ -271,7 +271,7 @@ predictions = model.predict_generator(val)
 
 # Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
-val_path = "/kaggle/input/dog-emotions-prediction/images/"
+val_path = "images/"
 
 plt.figure(figsize=(15, 15))
 
