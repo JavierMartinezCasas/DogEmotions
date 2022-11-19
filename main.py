@@ -98,8 +98,6 @@ val = data_with_aug.flow_from_directory(dataset_path,
 
 mnet = MobileNetV2(include_top=False, weights="imagenet", input_shape=(96, 96, 3))
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 tf.keras.backend.clear_session()
 
 model = Sequential([mnet,
@@ -121,8 +119,6 @@ model.summary()
 Model: "sequential"
 
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 def scheduler(epoch):
     if epoch <= 2:
         return 0.001
@@ -134,14 +130,10 @@ def scheduler(epoch):
 
 lr_callbacks = tf.keras.callbacks.LearningRateScheduler(scheduler)
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 hist = model.fit_generator(train,
                            epochs=20,
                            callbacks=[lr_callbacks],
                            validation_data=val)
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 epochs = 20
 train_loss = hist.history['loss']
@@ -172,8 +164,6 @@ plt.legend(['train', 'val'], loc=4)
 # print plt.style.available # use bmh, classic,ggplot for big pictures
 plt.style.use(['classic'])
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 train = data_with_aug.flow_from_directory(dataset_path,
                                           class_mode="binary",
                                           target_size=(224, 224),
@@ -187,15 +177,9 @@ val = data_with_aug.flow_from_directory(dataset_path,
                                         subset="validation"
                                         )
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 vgg16_model = tf.keras.applications.vgg16.VGG16(include_top=False, weights="imagenet", input_shape=(224, 224, 3))
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 vgg16_model.output[-1]
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 # model = Sequential()
 # for layer in vgg16_model.layers[:-1]:
@@ -225,14 +209,10 @@ model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=
 
 model.summary()
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 hist = model.fit_generator(train,
                            epochs=20,
                            callbacks=[lr_callbacks],
                            validation_data=val)
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 epochs = 20
 train_loss = hist.history['loss']
@@ -263,13 +243,8 @@ plt.legend(['train', 'val'], loc=4)
 # print plt.style.available # use bmh, classic,ggplot for big pictures
 plt.style.use(['classic'])
 
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
-
 # Creating an array of predicted test images
-
 predictions = model.predict_generator(val)
-
-# Code by 'Real vs Fake face detection' https://www.kaggle.com/code/debasisdotcom/real-vs-fake-face-detection
 
 val_path = "images/"
 
