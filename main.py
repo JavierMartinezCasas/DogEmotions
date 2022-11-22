@@ -214,6 +214,8 @@ hist = model.fit_generator(train,
                            callbacks=[lr_callbacks],
                            validation_data=val)
 
+
+model.save('modelo.h5')
 epochs = 20
 train_loss = hist.history['loss']
 val_loss = hist.history['val_loss']
@@ -244,7 +246,7 @@ plt.legend(['train', 'val'], loc=4)
 plt.style.use(['classic'])
 
 # Creating an array of predicted test images
-predictions = model.predict_generator(val)
+predictions = model.predict(val)
 
 val_path = "images/"
 
