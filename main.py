@@ -163,6 +163,7 @@ plt.grid(True)
 plt.legend(['train', 'val'], loc=4)
 # print plt.style.available # use bmh, classic,ggplot for big pictures
 plt.style.use(['classic'])
+plt.show()
 
 train = data_with_aug.flow_from_directory(dataset_path,
                                           class_mode="binary",
@@ -215,7 +216,7 @@ hist = model.fit_generator(train,
                            validation_data=val)
 
 
-model.save('modelo.h5')
+model.save('modelo_fast.h5')
 epochs = 20
 train_loss = hist.history['loss']
 val_loss = hist.history['val_loss']
