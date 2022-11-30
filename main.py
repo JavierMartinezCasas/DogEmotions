@@ -216,7 +216,7 @@ hist = model.fit_generator(train,
                            validation_data=val)
 
 
-model.save('modelo_fast.h5')
+model.save('modelo_almost_fin.h5')
 epochs = 20
 train_loss = hist.history['loss']
 val_loss = hist.history['val_loss']

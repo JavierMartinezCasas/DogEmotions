@@ -22,8 +22,8 @@ def load_img(path):
     image = cv2.resize(image, (224, 224))
     return image[..., ::-1]
 
-new_model = tf.keras.models.load_model('modelo.h5')
-dataset_path = "images"
+new_model = tf.keras.models.load_model('modelo_fast.h5')
+dataset_path = "images/"
 
 data_with_aug = ImageDataGenerator(horizontal_flip=True,
                                    vertical_flip=False,
@@ -36,14 +36,14 @@ val = data_with_aug.flow_from_directory(dataset_path,
                                         batch_size=98,
                                         subset="validation"
                                         )
-
 predictions = new_model.predict(val)
+print(predictions)
 
 val_path = "images/"
 
 plt.figure(figsize=(15, 15))
 
-start_index = 250
+start_index = 1500
 
 for i in range(16):
     plt.subplot(4, 4, i + 1)
@@ -52,14 +52,16 @@ for i in range(16):
     plt.yticks([])
 
     preds = np.argmax(predictions[[start_index + i]])
+    print(preds)
 
-    gt = val.filenames[start_index + i][9:13]
+    gt = val.filenames[start_index + i]
+    #[9:13]
 
-    if gt == "angry":
+    if "angry" in gt:
         gt = 0
-    elif gt == 'sad':
+    elif 'sad' in gt:
         gt = 1
-    elif gt == 'pleased':
+    elif "relaxed" in gt:
         gt = 2
     else:
         gt = 3
