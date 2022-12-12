@@ -1,18 +1,10 @@
-import os
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import matplotlib
 
-
-
 matplotlib.use('TkAgg')
-from keras.applications.mobilenet_v2 import MobileNetV2
-from keras.layers import Dropout, Dense, BatchNormalization, Flatten
-from keras.layers import GlobalAveragePooling2D
-from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 
 
@@ -21,6 +13,7 @@ def load_img(path):
     image = cv2.imread(path)
     image = cv2.resize(image, (224, 224))
     return image[..., ::-1]
+
 
 new_model = tf.keras.models.load_model('modelo_fast.h5')
 dataset_path = "images/"
@@ -55,7 +48,7 @@ for i in range(16):
     print(preds)
 
     gt = val.filenames[start_index + i]
-    #[9:13]
+    # [9:13]
 
     if "angry" in gt:
         gt = 0
