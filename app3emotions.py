@@ -17,7 +17,6 @@ input_arr = np.array([input_arr])  # Convert single image to a batch.
 #new_model = tf.keras.models.load_model('modelo_babizuelo.h5')  # Es el modelo corto actualizar abajo
 predictions = new_model.predict(input_arr)
 preds = np.argmax(predictions)
-print(predictions)
 
 if predictions.take(2) > 0.5:
     preds = 2
